@@ -3,6 +3,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse, Response, RedirectResponse
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
@@ -31,7 +32,17 @@ UPLOADS_DIR = ROOT_DIR / "uploads"
 UPLOADS_DIR.mkdir(exist_ok=True)
 
 # MongoDB connection with Connection Pooling for better performance
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.getenv("MONGO_URL") or os.getenv("MONGODB_URI") or os.getenv("DATABASE_URL")
+if not mongo_url:
+    raise RuntimeError("Missing MongoDB connection string. Set MONGO_URL (or MONGODB_URI/DATABASE_URL) in .env")
+
+db_name = os.getenv("DB_NAME")
+if not db_name:
+    parsed = urlparse(mongo_url)
+    if parsed.path and parsed.path != "/":
+        db_name = parsed.path.lstrip("/")
+if not db_name:
+    raise RuntimeError("Missing DB_NAME. Add DB_NAME to .env (e.g., DB_NAME=your_database)")
 client = AsyncIOMotorClient(
     mongo_url,
     maxPoolSize=10,  # Keep 10 connections warm
@@ -42,7 +53,7 @@ client = AsyncIOMotorClient(
     retryWrites=True,  # Automatically retry failed writes
     retryReads=True    # Automatically retry failed reads
 )
-db = client[os.environ['DB_NAME']]
+db = client[db_name]
 
 # JWT Configuration
 JWT_SECRET = os.environ.get('JWT_SECRET', 'wheelstat-secret-key-2024')
