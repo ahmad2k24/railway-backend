@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 3.5%;
+  --foreground: 0 0% 98%;
+  --card: 240 5% 9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 5% 9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 84% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 5% 14%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5% 14%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 240 5% 14%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5% 17%;
+  --input: 240 5% 17%;
+  --ring: 0 84% 60%;
+  --radius: 0rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #09090b;
+  color: #fafafa;
+}
+
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* OPTIMIZED GLOW - Uses much less RAM */
+.glow-red {
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
+}
+
+.glow-red-strong {
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+/* SCANLINES REMOVED FOR PERFORMANCE */
+
+/* HARDWARE-ACCELERATED PULSE - Uses GPU, not CPU */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.98); }
+}
+
+.status-pulse {
+  animation: pulse 2s ease-in-out infinite;
+  will-change: opacity, transform; /* Tells the browser to stay fast */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Department badge colors */
+.dept-received { border-color: #3b82f6; color: #3b82f6; }
+.dept-design { border-color: #8b5cf6; color: #8b5cf6; }
+.dept-program { border-color: #06b6d4; color: #06b6d4; }
+.dept-machine { border-color: #f97316; color: #f97316; }
+.dept-powder_coat { border-color: #ec4899; color: #ec4899; }
+.dept-assembly { border-color: #22c55e; color: #22c55e; }
+.dept-showroom { border-color: #eab308; color: #eab308; }
+.dept-completed { border-color: #22c55e; color: #22c55e; }
+
+/* SMOOTH ORDER CARDS - With distinct shadow for visual separation */
+.order-card {
+  background: #ef4444 !important; /* Red background */
+  border: 2px solid #dc2626 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+.order-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.order-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  background: #dc2626 !important; /* Darker red on hover */
+  border-color: #b91c1c !important;
+}
+
+/* Department column styling */
+.dept-column {
+  background: linear-gradient(180deg, rgba(24, 24, 27, 0.9) 0%, rgba(9, 9, 11, 0.95) 100%);
+  border: 1px solid rgba(63, 63, 70, 0.4);
+  position: relative;
+}
+
+.dept-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444 0%, transparent 70%);
+}
+
+.dept-column-header {
+  background: linear-gradient(180deg, rgba(24, 24, 27, 1) 0%, rgba(18, 18, 20, 1) 100%) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2) !important;
+}
+
+/* RUSH indicator - Static border instead of animation for performance */
+.order-card.rush-glow {
+  border-left: 4px solid white !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Days counter badge styling */
+.days-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.days-badge-safe {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.days-badge-warning {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: warningPulse 2s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Admin notes section */
+.admin-notes {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.04) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-left: 3px solid #f59e0b;
+}
+
+/* Cards now load without animation for better performance */
+.order-card {
+  opacity: 1;
+}
+
+/* Stats card corporate styling */
+.stats-card {
+  background: linear-gradient(135deg, rgba(24, 24, 27, 0.95) 0%, rgba(9, 9, 11, 0.98) 100%) !important;
+  border: 1px solid rgba(63, 63, 70, 0.5) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.stats-card::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444 0%, transparent 100%);
+  opacity: 0.5;
+}
+
+.stats-card:hover {
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+.stats-card:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Reduces CPU/GPU load on mobile devices
+   ======================================== */
+
+/* Disable animations on mobile - MAJOR PERFORMANCE BOOST */
+@media (max-width: 768px) {
+  /* Disable pulse animations which are very expensive on mobile */
+  .animate-pulse,
+  [class*="animate-pulse"] {
+    animation: none !important;
+  }
+  
+  /* Disable transform animations on mobile */
+  .hover\:scale-105:hover,
+  .hover\:scale-\[1\.02\]:hover {
+    transform: none !important;
+  }
+  
+  /* Simplify order card hover effects */
+  .order-card:hover {
+    transform: none !important;
+    background: #dc2626 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  /* Simplify stats card effects */
+  .stats-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Reduce gradient complexity */
+  .stats-card {
+    background: rgba(24, 24, 27, 0.95) !important;
+  }
+  
+  /* Disable backdrop blur (very expensive on mobile) */
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Simplify shadows */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  }
+  
+  /* Reduce transition durations */
+  * {
+    transition-duration: 0.1s !important;
+  }
+  
+  /* Hardware acceleration for scrolling */
+  .scroll-area,
+  [data-radix-scroll-area-viewport],
+  .overflow-auto,
+  .overflow-y-auto,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+  }
+  
+  /* Reduce badge complexity */
+  [class*="Badge"] {
+    animation: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+  /* Increase spacing on mobile */
+  .order-card {
+    padding: 1rem !important;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Larger touch targets */
+  button {
+    min-height: 40px;
+  }
+  
+  /* Better text spacing on mobile */
+  .font-mono {
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    word-spacing: 0.1em;
+  }
+  
+  /* Stats cards mobile */
+  .stats-card {
+    padding: 0.75rem;
+  }
+  
+  /* Department columns on mobile */
+  .dept-column {
+    min-width: 280px;
+    padding: 0.75rem;
+  }
+  
+  /* Better badge sizing on mobile */
+  .badge-industrial {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  
+  /* Header adjustments for mobile */
+  .app-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Improve form spacing on mobile */
+  input, select, textarea {
+    padding: 0.75rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Dialog/Modal improvements for mobile */
+  [role="dialog"] {
+    max-height: 90vh;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Table responsiveness */
+  .data-table {
+    font-size: 0.75rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.5rem 0.375rem;
+    white-space: nowrap;
+  }
+}
+
+/* Even smaller screens (phones) */
+@media (max-width: 480px) {
+  .order-card {
+    padding: 0.875rem !important;
+  }
+  
+  /* Reduce font sizes slightly but keep readable */
+  .font-oswald {
+    letter-spacing: 0.05em;
+  }
+  
+  /* Stack elements vertically */
+  .mobile-stack {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Even better text spacing on small screens */
+  .font-mono {
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+    word-spacing: 0.15em;
+  }
+  
+  /* Reduce header elements */
+  .app-header h1 {
+    font-size: 1rem !important;
+  }
+  
+  /* Stats grid on mobile */
+  .stats-card .font-oswald {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Better button sizing */
+  button {
+    min-height: 36px;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Card content improvements */
+  .order-card p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  /* Badge adjustments */
+  [class*="Badge"], .badge-industrial {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Login page animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}

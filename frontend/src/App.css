@@ -1,0 +1,164 @@
+/* Industrial Theme App Styles */
+
+.App {
+  min-height: 100vh;
+  background-color: #09090b;
+}
+
+/* Header styles - WHITE BACKGROUND */
+.app-header {
+  border-bottom: 3px solid #dc2626;
+  background-color: #ffffff !important;
+  backdrop-filter: none;
+}
+
+/* Department column styles */
+.dept-column {
+  background: rgba(24, 24, 27, 0.5);
+  border: 1px solid #27272a;
+  min-height: calc(100vh - 200px);
+}
+
+/* Department column header - WHITE BACKGROUND */
+.dept-column-header {
+  background: #ffffff !important;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 1rem;
+}
+
+/* Order card styles */
+.order-card {
+  background: rgba(24, 24, 27, 0.8);
+  border: 1px solid #27272a;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.order-card:hover {
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 #eab308;
+}
+
+/* Button industrial style */
+.btn-industrial {
+  background: #eab308;
+  color: #000;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+}
+
+.btn-industrial:hover {
+  background: #fbbf24;
+}
+
+.btn-industrial:active {
+  transform: scale(0.95);
+}
+
+/* Badge styles */
+.badge-industrial {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-width: 1px;
+}
+
+/* Stats card glow */
+.stats-card {
+  transition: box-shadow 0.3s ease-out;
+}
+
+.stats-card:hover {
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.1);
+}
+
+/* Product type tabs */
+.product-tab {
+  transition: border-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.product-tab.active {
+  border-color: #eab308;
+  color: #eab308;
+}
+
+/* Table styles */
+.data-table {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.data-table th {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  color: #71717a;
+}
+
+.data-table td {
+  font-size: 13px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* RTL Support for Arabic and Kurdish Sorani */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .order-card:hover {
+  transform: translateX(-4px);
+  box-shadow: 4px 0 0 0 #eab308;
+}
+
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .ml-1, [dir="rtl"] .ml-2, [dir="rtl"] .ml-3, [dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: inherit;
+}
+
+[dir="rtl"] .mr-1, [dir="rtl"] .mr-2, [dir="rtl"] .mr-3, [dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: inherit;
+}
+
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Arabic font support */
+.font-arabic {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Language selector dropdown positioning */
+[dir="rtl"] [data-radix-popper-content-wrapper] {
+  left: auto !important;
+  right: 0 !important;
+}
